@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2D Animation Styles & Techniques</title>
+
+        <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css"
+    rel="stylesheet"
+/>
+<script src="https://unpkg.com/scrollreveal"></script>
+
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap');
+
+    *{
+        box-sizing: border-box;
+        margin: 0%;
+        padding: 0%;
+      
+        font-family: "Roboto Slab", serif;
+    }
+
+    html{
+  scroll-behavior: smooth;
+}
+
+
+    h1,h2,h3,h4{
+  text-transform: capitalize;
+}
+p{
+  text-transform: none;
+}
+
+
+    body{
+        background-color: #1f2933f5;
+        color: whitesmoke;
+        padding-top: 90px;
+
+    }
+    header{
+        position: relative;
+        padding: 2rem 0;
+        background: linear-gradient(to bottom, rgba(0,0,0,0),rgba(0,0,0,0.1));
+    }
+    .logo{
+        font-size: 2rem;
+        font-weight: 600;
+        
+    }
+    .navbar{
+        width: 100%;
+        padding: 2rem 4rem;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        z-index: 1;
+        top: 0;
+        position: fixed;
+        background-color: #d4dc3af8;
+        color: whitesmoke;
+        border-bottom-left-radius: 20px;
+        
+
+    }
+    .navbar.scrolled{
+        /* background-color: #d6d6d6; */
+        box-shadow: rgba(0,0,0,0.35) 0px 5px 15px;
+    }
+    .nav_items {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex: 1;
+    }
+
+    .nav_items li {
+        list-style: none;
+        padding: 1em;
+    }
+
+    .nav_items li a{
+        text-decoration: none;
+        transition: 0.3s;
+        font-size: 16px;
+        font-weight: 600;
+        color:#082567;
+    }
+
+    .nav_items li::before{
+        content: '';
+        height: 2px;
+        width: 0%;
+        
+        background: #0071c5;
+        display: block;
+        margin: auto;
+        transition: 0.5s;
+    }
+    .nav_items li:hover::before{
+        width: 100%;
+        
+    }
+
+    img{
+        border-radius: 20px;
+        box-shadow: 5px 5px 5px rgba(57, 57, 57, 0.559);
+        transition: 0.25s ease-in-out;
+    }
+
+    img:hover{
+       transform: translateY(-15px);
+    }
+    .btn{
+        padding: 12px 15px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+    .btn1{
+        background-color: transparent;
+        border: 2px solid transparent;
+        margin-right: 2px;
+    }
+    .btn1:hover{
+        color: #0071c5;
+        border: 2px solid #0071c5;
+    }
+    
+    .btn2{
+        background-color: #0071c5;
+        color: #fff;
+        border: 2px solid #082567;
+    }
+    .btn2:hover{
+        color: #0071c5;
+        border: 2px solid #0071c5;
+        background-color: transparent;
+    }
+
+    .nav_menu{
+        display: none;
+    }
+    .main{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        align-items: center;
+        padding: 6em 2em 2em 2em;
+        box-sizing: border-box;
+        width: 90%;
+        margin: auto;
+    }
+
+    .left h1{
+        font-size: 3em;
+    }
+
+    .left p{
+        font-size: 14px;
+        line-height: 1.5rem;
+        padding: 2% 0;
+    }
+
+    .right{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .right img{
+        width: 500px;
+        max-width: 100%;
+        height: auto;
+    }
+
+    .sec{
+        padding: 8% 0 5% 0;
+        width: 82%;
+        margin: auto;
+    }
+
+    .head,.Service_box{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0em 6em;
+        align-items: center;
+
+    }
+
+    .head .sub_heading,
+    .head .heading{
+        grid-column: 1;
+    }
+    .sub_heading{
+        color: #0071c5;
+        font-size: 1.7em;
+    }
+    .heading{
+        font-size: 3em;
+    }
+
+    .head .para{
+        grid-column: 2;
+        text-align: right;
+        color: #7f7f81;
+    }
+    .boxes{
+        margin-top: 4rem;
+        display: grid;
+        gap: 2rem;
+        grid-template-columns: repeat(3, 1fr);
+    }
+.box{
+    text-align: center;
+}
+
+.box span, .right_box li span, .box_1 span{
+    display: inline-block;
+    font-size: 2.3em;
+    margin-bottom: 2rem;
+    padding: 10px 17px;
+    color: #0092ff;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    border: 4px solid #fff;
+    box-shadow: 5px 5px 20px rgba(0,0,0,0.1);
+}
+.box h4{
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #000;
+}
+
+.box:hover span, .right_box li:hover span{
+    padding: 14px 21px;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    background: linear-gradient(to bottom, #082567, #0071c5);
+}
+
+.head_1{
+    width: 70%;
+    text-align: center;
+    margin: auto;
+}
+
+.para{
+    color: #777;
+}
+
+.head_1 .heading{
+    padding: 15px 0;
+}
+
+.Service_box{
+    padding-top: 4rem;
+    gap: 0em 3em;
+}
+
+.Service_box li {
+    list-style: none;
+}
+
+.left_box p{
+    font-size: 14px;
+    padding: 15px 0;
+    line-height: 1.5em;
+    margin-right: 3em;
+    color: #777;
+}
+.left_box li{
+    padding: 15px 0;
+}
+
+.left_box li i{
+    color: #fff;
+    padding: 1px;
+    background: linear-gradient(to bottom, #082567, #0071c5);
+    border-radius: 50%;
+    margin-right: 12px;
+}
+ 
+.left_box button{
+    margin-top: 2em;
+}
+.right_box li{
+    display: flex;
+    align-items: flex-start;
+    gap: 1em;
+    margin: 2% 0;
+}
+.right_box h4{
+    font-size: 19px;
+}
+.right_box p{
+    font-size: 15px;
+    padding-top: 12px;
+    color: #777;
+}
+
+.boxes_1{
+    margin-inline: auto;
+    margin-top: 4rem;
+    position: relative;
+}
+.box_1{
+    position: absolute;
+    max-width: 190px;
+}
+.box_1 span{
+    margin-bottom: 0.5rem;
+    font-size: 1.7rem;
+    background-color: #edf6fd;
+}
+
+.box_1:nth-child(2){
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.box_1:nth-child(3){
+    left: 5rem;
+    bottom: 0rem;
+}
+
+
+.box_1:nth-child(4){
+    right: 5rem;
+    top: 1rem;
+    text-align: right;
+}
+
+.box_1:nth-child(5){
+    right: 1rem;
+    top: 50%;
+    text-align: right;
+    transform: translateY(-50%);
+}
+
+
+.box_1:nth-child(6){
+    right: 5rem;
+    bottom: 0rem;
+    text-align: right;
+}
+
+.boxes_1 img{
+    width: 420px;
+    display: flex;
+    margin-inline: auto;
+}
+
+.contact{
+    background: linear-gradient(to bottom, #082567 ,#0071c5);
+    margin: 4% auto;
+    border-radius: 15px;
+    color: #fff;
+}
+
+.box_2{
+    text-align: center;
+    margin-top: 2%;
+}
+
+.box_2 input{
+    padding: 12px 15px;
+    font-size: 16px;
+    outline: none;
+    border: 2px solid #082567;
+}
+
+.box_2 button{
+    background-color: #0092ff;
+    color: #fff;
+    border: 2px solid #fff;
+}
+
+.footer{
+    background-color:#d4dc3af8 ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+     border-top-right-radius: 50%;
+     border-top-left-radius: 50%;
+
+}
+
+
+@media only screen and (max-width:920px){
+    .main{
+        width: 95%;
+    }
+    .left h1{
+        font-size: 2.7em;
+    }
+    .navbar{
+        padding: 2rem 2rem;
+    }
+    .sec{
+        width: 90%;
+    }
+
+}
+
+@media only screen and (max-width:820px) {
+
+     .nav_menu{
+        display: block;
+        font-size: 2rem;
+        cursor: pointer;
+        
+    }
+
+    .nav_items{
+        position: absolute;
+        top: -1%;
+        left: 0%;
+        width: 100%;
+        padding: 5em 0em 2em 0;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        flex-direction: column;
+        gap: 0.2rem;
+        background-color:#d4dc3af8;
+        
+        transition: 0.5s;
+        z-index: -1;
+        transform: translateY(-100%);
+    }
+
+    .nav_items.open{
+        transform: translateY(0);
+    }
+
+    .nav_btns{
+        display: none;
+    }
+
+    .main,.head,.Service_box{
+        grid-template-columns: 1fr;
+    }
+
+    .head_1{
+        width: 95%;
+    }
+    
+    .head .para{
+        grid-column: 1;
+    }
+    .boxes{
+        grid-template-columns: repeat(2,1fr);
+    }
+    .boxes_1 img{
+        opacity: 0.4;
+    }
+    .footer{
+        grid-template-columns: repeat(3,1fr);
+    }
+}
+
+@media only screen and (max-width:680px) {
+    .boxes{
+        grid-template-columns: repeat(1,1fr);
+
+    }
+    .route{
+        width: 100%;
+    }
+    .footer_bar{
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer{
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+
+@media only screen and (max-width:465px) {
+    .left h1{
+        font-size: 2em;
+    }
+    .heading{
+        font-size: 2.5em;
+    }
+    .main{
+        width: 100%;
+    }
+    .box_1{
+        width: 100px;
+    }
+    .boxes_1 img{
+        width: 300px;
+        padding: 5em 0;
+    }
+    .box_2 input, .box_2 button{
+        width: 70%;
+    }
+    .box_2 button{
+        margin-top: 2%;
+    }
+    .footer{
+        grid-template-columns: repeat(1,1fr);
+    }
+}
+
+
+</style>
+<body>
+    <header id="home">
+        <nav class="navbar">
+            <div class="logo">Animations Styles & Techniques</div>
+
+            <ul class="nav_items" id="nav_links">
+                <li><a href="#home" >Home</a></li>
+               
+                <li><a href="3D.html">3DAnimation</a></li>
+
+                 <li><a href="t.html">Animation Types</a></li>
+                <li><a href="#Contact">Contact</a></li>
+            </ul>
+<!-- 
+            <div class="nav_btns">
+                <button class="btn btn1">Sign up</button>
+                <button class="btn btn2">Sign in</button>
+            </div> -->
+            <div class="nav_menu" id="menu_btn">
+                <i class="ri-menu-line"></i>
+            </div>
+        </nav>
+         
+        <section class="main">
+            <div class="left">
+                <h1> Styles & Techniques for 2D Animation</h1>
+                <p>
+                    Picture this: You’re launching a video marketing campaign using 2D animation, aiming to capture the essence of your brand in a vivid and engaging way. However, choosing the wrong style could disconnect from your audience, diminishing your content’s impact.
+
+At Vidico, we’re well-versed in matching 2D animation styles to specific target groups to enhance engagement and achieve marketing goals.
+
+Let’s explore some popular 2D animation styles to help you connect with your audience on a deeper level, drive engagement, and achieve your marketing goals.
+                </p>
+                <div class="main_btn">
+                    <button class="btn btn2">explore more</button>
+                    
+                </div>
+            </div>
+            <div class="right">
+                <img src="images/2dmain.gif" alt="">
+
+            </div>
+
+        </section>
+
+    </header>
+
+    <section class="About sec" id="about">
+        <div class="head">
+            <h3 class="sub_heading">2D Animation Styles</h3>
+            <h1 class="heading">What is 2D Animation ?</h1>
+            <p class="para">2D animation styles encompass a range of techniques from traditional hand-drawn methods to modern digital, vector, and cut-out styles, used in film, TV, and marketing. Common approaches include classic frame-by-frame (e.g., The Lion King), digital vector, rotoscoping, and isometric animation, which create two-dimensional, often flat, but highly expressive motion. 
+
+            </p>
+        </div>
+        
+    </section>
+
+     <section class="main">
+            <div class="left">
+                <h1>Traditional 2D Animation Style</h1>
+                <p>
+                   Traditional 2D animation styles, also known as hand-drawn or cel animation, involve drawing each frame by hand. This animation technique requires a high level of artistry and patience, as every movement is created by drawing individual frames.
+
+The result of these 2D animation styles is fluid, detailed animation that carries a timeless and artisanal feel. The animation process can be labor-intensive and time-consuming, but it offers a unique and charming aesthetic that many modern digital techniques strive to emulate.
+                </p>
+               
+            </div>
+            <div class="right">
+                <img src="images/2d1.gif" alt="">
+
+            </div>
+
+        </section>
+
+        
+     <section class="main">
+          <div class="right">
+                <img src="images/2d2.gif" alt="">
+
+            </div>
+            <div class="left">
+                <h1>Cut-Out animation</h1>
+                <p>
+                  Cut-out animation involves creating animated characters, props, and backgrounds from flat materials such as paper, fabric, or digital images and then moving these cut-out pieces frame by frame to create the illusion of motion .
+
+This technique is cost-effective and allows for a distinct, storybook-like aesthetic. It can be produced physically, with actual cut-out pieces, or digitally, using software to simulate the cut-out effect. The animation style is often characterized by its somewhat jerky yet charming movement and is suitable for simple and complex storytelling.
+                </p>
+               
+            </div>
+          
+
+        </section>
+
+
+
+              
+     <section class="main">
+            <div class="left">
+                <h1> Isometric Animation</h1>
+                <p>
+                Isometric animation involves creating a 3D-like effect using 2D graphics. This technique uses an isometric perspective, which means static objects are drawn at angles that give the illusion of depth and dimension without traditional 3D rendering.
+
+Isometric is often used in arcade games, infographics, and explainer videos because it allows for detailed and visually interesting environments that can be navigated and interacted with in a unique way.
+                </p>
+               
+            </div>
+            <div class="right">
+                <img src="images/2d3.gif" alt="">
+
+            </div>
+
+        </section>
+
+
+
+
+
+
+         <section class="main">
+             <div class="right">
+                <img src="images/2d4.gif" alt="">
+
+            </div>
+            <div class="left">
+
+                <h1>Digital 2D Animation</h1>
+                <p>
+                  Digital 2D animation involves creating animations using digital tools and software, such as Adobe Animate, Toon Boom Harmony, or After Effects.
+
+Unlike traditional 2D animation, where each frame is drawn by hand, digital 2D animation allows animators to streamline the process using various techniques, such as tweening, rigging, and vector graphics.
+
+This method offers greater flexibility, efficiency, and precision, enabling animators to produce high-quality, detailed animations with smooth movements. Digital 2D animation is versatile and widely used in various media, including television shows, web series, commercials, and online content.
+                </p>
+               
+            </div>
+           
+
+        </section>
+
+        
+     <section class="main">
+         
+            <div class="left">
+                <h1> Travel Portland</h1>
+                <p>
+                    Travel Portland employs a unique combination of hand-drawn style and real-world elements to create a significant impact in a grungy animation. This video showcases the city’s diverse attractions using various animation techniques.
+
+The stop-motion animation technique and classic animation concepts are all integrated, resulting in a visually captivating and dynamic presentation.
+
+Created in After Effects, the stop-motion animation highlights Portland’s vibrant culture, scenic landscapes, and eclectic charm, appealing to a broad audience.
+                </p>
+               
+            </div>
+           <div class="right">
+                <img src="images/2d5.gif" alt="">
+
+            </div>
+
+        </section>
+
+
+
+              
+     <section class="main">
+          <div class="right">
+                <img src="images/2d6.gif" alt="">
+
+            </div>
+
+            <div class="left">
+                <h1>Veteran’s Day </h1>
+                <p>
+               A gritty-style liquid animated video has never looked so good. In this commercial for NBC and Syfy, liquid animation combines a grungy stop-motion design to create a striking visual impact.
+
+The video employs toon shading in Cinema 4D, a standard 2D rendering simulation animation technique, to enhance the overall effect and add depth to the animation. This combination results in a visually compelling tribute to Veteran’s Day.
+                </p>
+               
+            </div>
+          
+        </section>
+
+
+
+
+
+       <footer class="footer">Created BY Aditya </footer>
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+        
+
+
+        <script>
+/* Navbar scroll */
+window.addEventListener('scroll',()=>{
+  document.querySelector('.navbar')
+    .classList.toggle('scrolled',window.scrollY>20);
+});
+
+/* Mobile menu */
+const menuBtn=document.getElementById('menu_btn');
+const navLinks=document.getElementById('nav_links');
+const menuIcon=menuBtn.querySelector('i');
+
+menuBtn.onclick=()=>{
+  navLinks.classList.toggle('open');
+  menuIcon.className=
+    navLinks.classList.contains('open')
+    ? 'ri-close-line'
+    : 'ri-menu-line';
+};
+
+/* ScrollReveal */
+const srOpt={ distance:'50px', duration:1000, origin:'bottom' };
+
+ScrollReveal().reveal('.left h1',{...srOpt,delay:300});
+ScrollReveal().reveal('.left p',{...srOpt,delay:600});
+ScrollReveal().reveal('.right img',{...srOpt,origin:'right'});
+ScrollReveal().reveal('.btn',{...srOpt,delay:900});
+</script>
+
+
+</body>
+
+
+ 
+
+
+</html>

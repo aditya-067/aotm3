@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Animation</title>
+
+        <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css"
+    rel="stylesheet"
+/>
+<script src="https://unpkg.com/scrollreveal"></script>
+
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap');
+
+    *{
+        box-sizing: border-box;
+        margin: 0%;
+        padding: 0%;
+      
+        font-family: "Roboto Slab", serif;
+    }
+
+    html{
+  scroll-behavior: smooth;
+}
+
+
+    h1,h2,h3,h4{
+  text-transform: capitalize;
+}
+p{
+  text-transform: none;
+}
+
+
+    body{
+        background-color: #1f2933f5;
+        color: whitesmoke;
+        padding-top: 90px;
+
+    }
+    header{
+        position: relative;
+        padding: 2rem 0;
+        background: linear-gradient(to bottom, rgba(0,0,0,0),rgba(0,0,0,0.1));
+    }
+    .logo{
+        font-size: 2rem;
+        font-weight: 600;
+        
+    }
+    .navbar{
+        width: 100%;
+        padding: 2rem 4rem;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        z-index: 1;
+        top: 0;
+        position: fixed;
+        background-color: #d4dc3af8;
+        color: whitesmoke;
+        border-bottom-left-radius: 20px;
+        
+
+    }
+    .navbar.scrolled{
+        /* background-color: #d6d6d6; */
+        box-shadow: rgba(0,0,0,0.35) 0px 5px 15px;
+    }
+    .nav_items {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex: 1;
+    }
+
+    .nav_items li {
+        list-style: none;
+        padding: 1em;
+    }
+
+    .nav_items li a{
+        text-decoration: none;
+        transition: 0.3s;
+        font-size: 16px;
+        font-weight: 600;
+        color:#082567;
+    }
+
+    .nav_items li::before{
+        content: '';
+        height: 2px;
+        width: 0%;
+        
+        background: #0071c5;
+        display: block;
+        margin: auto;
+        transition: 0.5s;
+    }
+    .nav_items li:hover::before{
+        width: 100%;
+        
+    }
+
+    img{
+        border-radius: 20px;
+        box-shadow: 5px 5px 5px rgba(57, 57, 57, 0.559);
+        transition: 0.25s ease-in-out;
+    }
+
+    img:hover{
+       transform: translateY(-15px);
+    }
+    .btn{
+        padding: 12px 15px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+    .btn1{
+        background-color: transparent;
+        border: 2px solid transparent;
+        margin-right: 2px;
+    }
+    .btn1:hover{
+        color: #0071c5;
+        border: 2px solid #0071c5;
+    }
+    
+    .btn2{
+        background-color: #0071c5;
+        color: #fff;
+        border: 2px solid #082567;
+    }
+    .btn2:hover{
+        color: #0071c5;
+        border: 2px solid #0071c5;
+        background-color: transparent;
+    }
+
+    .nav_menu{
+        display: none;
+    }
+    .main{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        align-items: center;
+        padding: 6em 2em 2em 2em;
+        box-sizing: border-box;
+        width: 90%;
+        margin: auto;
+    }
+
+    .left h1{
+        font-size: 3em;
+    }
+
+    .left p{
+        font-size: 14px;
+        line-height: 1.5rem;
+        padding: 2% 0;
+    }
+
+    .right{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .right img{
+        width: 500px;
+        max-width: 100%;
+        height: auto;
+    }
+
+    .sec{
+        padding: 8% 0 5% 0;
+        width: 82%;
+        margin: auto;
+    }
+
+    .head,.Service_box{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0em 6em;
+        align-items: center;
+
+    }
+
+    .head .sub_heading,
+    .head .heading{
+        grid-column: 1;
+    }
+    .sub_heading{
+        color: #0071c5;
+        font-size: 1.7em;
+    }
+    .heading{
+        font-size: 3em;
+    }
+
+    .head .para{
+        grid-column: 2;
+        text-align: right;
+        color: #7f7f81;
+    }
+    .boxes{
+        margin-top: 4rem;
+        display: grid;
+        gap: 2rem;
+        grid-template-columns: repeat(3, 1fr);
+    }
+.box{
+    text-align: center;
+}
+
+.box span, .right_box li span, .box_1 span{
+    display: inline-block;
+    font-size: 2.3em;
+    margin-bottom: 2rem;
+    padding: 10px 17px;
+    color: #0092ff;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    border: 4px solid #fff;
+    box-shadow: 5px 5px 20px rgba(0,0,0,0.1);
+}
+.box h4{
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #000;
+}
+
+.box:hover span, .right_box li:hover span{
+    padding: 14px 21px;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    background: linear-gradient(to bottom, #082567, #0071c5);
+}
+
+.head_1{
+    width: 70%;
+    text-align: center;
+    margin: auto;
+}
+
+.para{
+    color: #777;
+}
+
+.head_1 .heading{
+    padding: 15px 0;
+}
+
+.Service_box{
+    padding-top: 4rem;
+    gap: 0em 3em;
+}
+
+.Service_box li {
+    list-style: none;
+}
+
+.left_box p{
+    font-size: 14px;
+    padding: 15px 0;
+    line-height: 1.5em;
+    margin-right: 3em;
+    color: #777;
+}
+.left_box li{
+    padding: 15px 0;
+}
+
+.left_box li i{
+    color: #fff;
+    padding: 1px;
+    background: linear-gradient(to bottom, #082567, #0071c5);
+    border-radius: 50%;
+    margin-right: 12px;
+}
+ 
+.left_box button{
+    margin-top: 2em;
+}
+.right_box li{
+    display: flex;
+    align-items: flex-start;
+    gap: 1em;
+    margin: 2% 0;
+}
+.right_box h4{
+    font-size: 19px;
+}
+.right_box p{
+    font-size: 15px;
+    padding-top: 12px;
+    color: #777;
+}
+
+.boxes_1{
+    margin-inline: auto;
+    margin-top: 4rem;
+    position: relative;
+}
+.box_1{
+    position: absolute;
+    max-width: 190px;
+}
+.box_1 span{
+    margin-bottom: 0.5rem;
+    font-size: 1.7rem;
+    background-color: #edf6fd;
+}
+
+.box_1:nth-child(2){
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.box_1:nth-child(3){
+    left: 5rem;
+    bottom: 0rem;
+}
+
+
+.box_1:nth-child(4){
+    right: 5rem;
+    top: 1rem;
+    text-align: right;
+}
+
+.box_1:nth-child(5){
+    right: 1rem;
+    top: 50%;
+    text-align: right;
+    transform: translateY(-50%);
+}
+
+
+.box_1:nth-child(6){
+    right: 5rem;
+    bottom: 0rem;
+    text-align: right;
+}
+
+.boxes_1 img{
+    width: 420px;
+    display: flex;
+    margin-inline: auto;
+}
+
+.contact{
+    background: linear-gradient(to bottom, #082567 ,#0071c5);
+    margin: 4% auto;
+    border-radius: 15px;
+    color: #fff;
+}
+
+.box_2{
+    text-align: center;
+    margin-top: 2%;
+}
+
+.box_2 input{
+    padding: 12px 15px;
+    font-size: 16px;
+    outline: none;
+    border: 2px solid #082567;
+}
+
+.box_2 button{
+    background-color: #0092ff;
+    color: #fff;
+    border: 2px solid #fff;
+}
+
+footer{
+    background-color:#d4dc3af8 ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    border-top-right-radius: 50%;
+     border-top-left-radius: 50%;
+
+}
+
+
+
+@media only screen and (max-width:920px){
+    .main{
+        width: 95%;
+    }
+    .left h1{
+        font-size: 2.7em;
+    }
+    .navbar{
+        padding: 2rem 2rem;
+    }
+    .sec{
+        width: 90%;
+    }
+
+}
+
+@media only screen and (max-width:820px) {
+
+     .nav_menu{
+        display: block;
+        font-size: 2rem;
+        cursor: pointer;
+        
+    }
+
+    .nav_items{
+        position: absolute;
+        top: -1%;
+        left: 0%;
+        width: 100%;
+        padding: 5em 0em 2em 0;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        flex-direction: column;
+        gap: 0.2rem;
+        background-color:#d4dc3af8;
+        
+        transition: 0.5s;
+        z-index: -1;
+        transform: translateY(-100%);
+    }
+
+    .nav_items.open{
+        transform: translateY(0);
+    }
+
+    .nav_btns{
+        display: none;
+    }
+
+    .main,.head,.Service_box{
+        grid-template-columns: 1fr;
+    }
+
+    .head_1{
+        width: 95%;
+    }
+    
+    .head .para{
+        grid-column: 1;
+    }
+    .boxes{
+        grid-template-columns: repeat(2,1fr);
+    }
+    .boxes_1 img{
+        opacity: 0.4;
+    }
+    .footer{
+        grid-template-columns: repeat(3,1fr);
+    }
+}
+
+@media only screen and (max-width:680px) {
+    .boxes{
+        grid-template-columns: repeat(1,1fr);
+
+    }
+    .route{
+        width: 100%;
+    }
+    .footer_bar{
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer{
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+
+@media only screen and (max-width:465px) {
+    .left h1{
+        font-size: 2em;
+    }
+    .heading{
+        font-size: 2.5em;
+    }
+    .main{
+        width: 100%;
+    }
+    .box_1{
+        width: 100px;
+    }
+    .boxes_1 img{
+        width: 300px;
+        padding: 5em 0;
+    }
+    .box_2 input, .box_2 button{
+        width: 70%;
+    }
+    .box_2 button{
+        margin-top: 2%;
+    }
+    .footer{
+        grid-template-columns: repeat(1,1fr);
+    }
+}
+
+
+</style>
+<body>
+    <header id="home">
+        <nav class="navbar">
+            <div class="logo">What is 3D Animation?</div>
+
+            <ul class="nav_items" id="nav_links">
+                <li><a href="#home" >Home</a></li>
+                 <li><a href="t.html">Animation Types</a></li>
+                <li><a href="index.html">12principal</a></li>
+                
+                <li><a href="#Contact">Contact</a></li>
+            </ul>
+<!-- 
+            <div class="nav_btns">
+                <button class="btn btn1">Sign up</button>
+                <button class="btn btn2">Sign in</button>
+            </div> -->
+            <div class="nav_menu" id="menu_btn">
+                <i class="ri-menu-line"></i>
+            </div>
+        </nav>
+         
+        <section class="main">
+            <div class="left">
+                <h1> What is 3D Animation?</h1>
+                <p>
+                   3D animation is used to create moving images in a three-dimensional environment. How is this done? With computer-generated imagery (or CGI). 
+
+See, in its most basic form, animation is when static images are organized in such a way that they look as if they’re moving. 
+
+So, animation is defined as a graphic technique that uses motion to bring characters, objects, props, and more to life. 
+
+The 3D aspect then comes into play when those static images are developed within a multi-dimensional environment to give the illusion that they’re moving in a life-like way. 
+                </p>
+                <!-- <div class="main_btn">
+                    <button class="btn btn2">explore more</button>
+                    
+                </div> -->
+            </div>
+            <div class="right">
+                <img src="images/3dmain.gif" alt="">
+
+            </div>
+
+        </section>
+
+    </header>
+
+    <section class="About sec" id="about">
+        <div class="head">
+            <h3 class="sub_heading">3D Animation Types, Processes, and Uses</h3>
+            <h1 class="heading">What is the difference between 2D and 3D animation? </h1>
+            <p class="para">Thanks to computer graphic imagery (CGI), 2D and 3D animation is possible. 
+
+Wondering what the biggest difference between 2D and 3D animation is? For one thing, 2D images are flat, while 3D images are multi-dimensional. But that’s not the only difference. 
+
+3D imagery looks more realistic because 2D objects are rendered and lit in such a way as to make them appear to have more depth. They are also composed into a sequence of actions and played at a high frame rate to give the appearance of motion. 
+
+While more compelling than 2D animation, 3D animation can also be time-consuming to create and more expensive because of the varying production stages involved. 3D animation is also less forgiving when corrections or revisions need to be made along the way. 
+            </p>
+        </div>
+        
+    </section>
+
+     <section class="main">
+            <div class="left">
+                <h1>Ways to use 3D animation </h1>
+                <p>
+                 3D animation has evolved far beyond its origins in gaming, TV shows, and movies. Today, it’s a versatile tool used across numerous industries for diverse purposes. From immersive corporate presentations to cutting-edge medical research, 3D animation is revolutionizing how we visualize and interact with information. 
+                 A 3D animated character is more vivid and engaging, almost like playing with a toy. This makes 3D animation very useful for kids’ entertainment. The "Frozen" movies are a great example. Elements of the story, like how the main character Elsa can transform objects into ice, become more enchanting in 3D.
+                </p>
+               
+            </div>
+            <div class="right">
+                <img src="images/3d.gif" alt="">
+
+            </div>
+
+        </section>
+
+        
+     <section class="main">
+          <div class="right">
+                <img src="images/3d2.gif" alt="">
+
+            </div>
+            <div class="left">
+                <h1> Gaming</h1>
+                <p>
+                  3D animation can give a more lifelike feeling to video games, intensifying the action for the player. When you’re battling an enemy or racing through an obstacle course, having the 3D sensation can make for a far more thrilling experience. 3D animation can also be used with virtual reality (VR) and augmented reality (AR) special effects, giving the player the sense that they’re inside the world in real time.
+
+“Horizon Zero Dawn” is one example of how a video game animation can leverage 3D technology. The action game involves a lot of physicalities, from avoiding traps to solving puzzles and battling enemies. The combatant robots in the game are far more intimidating in 3D, making for a more adrenaline-pumping experience.
+                </p>
+               
+            </div>
+          
+
+        </section>
+
+
+
+              
+     <section class="main">
+            <div class="left">
+                <h1>Marketing</h1>
+                <p>
+                3D animation can also prove valuable in marketing. For example, a marketer might use this technique to show off all the product’s features as they would appear in real life. Audiences can get a better sense of what the goods look like.
+
+Brands can also use 3D animation to showcase products through tutorials or demos, and to create more captivating content in general. In a world in which companies are constantly jockeying for the audience’s limited attention, a compelling video ad made using 3D techniques can keep consumers interested.
+
+This ad for the online casino app Borgata is a great example of the visual intensity 3D techniques can create to boost conversion rates.
+                </p>
+               
+            </div>
+            <div class="right">
+                <img src="images/3d1.gif" alt="">
+
+            </div>
+
+        </section>
+
+
+
+
+
+        
+
+        
+
+        
+
+
+
+
+
+
+         <section class="main" style="width: 100% ;  background: linear-gradient(to bottom, rgba(0,0,0,0),rgba(0,0,0,0.1));">
+             <div class="right">
+                <img src="images/3d5.gif" alt="">
+
+            </div>
+            <div class="left">
+
+                <h1>3D animation process</h1>
+                <p>
+                 3D techniques can take an animated figure that appears on a two-dimensional screen and make that object look three-dimensional and like it’s moving through a three-dimensional space. A skilled animation will have you reaching out and expecting to touch a 3D object, only to face a flat screen.
+
+How is 3D animation created? Here’s an overview of how to 3D animate for beginners.
+                </p>
+               
+            </div>
+           
+
+        </section>
+
+        
+     <section class="main">
+         
+            <div class="left">
+                <h1> Modeling</h1>
+                <p>
+                    In the modeling phase, animators create 3D objects to serve as the animation’s basis. This kind of animation is achieved by using a modeling tool. A 3D mesh is made from a simple object, called a primitive, which is then shaped and refined to the desired figure. The 3D models are then given details like color and texture. This is followed by a process known as rigging, which sets up a skeleton for the animation character that will allow it to move.
+                </p>
+               
+            </div>
+           <div class="right">
+                <img src="images/3d4.webp" alt="">
+
+            </div>
+
+        </section>
+
+
+
+              
+     <section class="main">
+          <div class="right">
+                <img src="images/3d3.webp" alt="">
+
+            </div>
+
+            <div class="left">
+                <h1>Layout and animation </h1>
+                <p>
+                Once the modeling and rigging are complete, 3D animators move on to the actual animation process. This is where they bring objects and characters to life through movement. There are several techniques animators use to create motion:Keyframe animation, Motion capture,Procedural animation. Animators often combine these techniques to achieve the desired result, choosing the most appropriate method for each scene element. The choice of technique depends on the project requirements, available resources, and the specific look and feel the animator aims to achieve.
+                </p>
+               
+            </div>
+          
+        </section>
+
+
+
+
+
+        <section class="main">
+         
+            <div class="left">
+                <h1>Rendering</h1>
+                <p>
+                   Once the animation, lighting, and camera angles are perfected, the animator can move on to rendering. In this process, the graphic images that have been designed are actually created and exported. The final render of the 3D character will be tweaked according to light and shadows, reflections, transparency, and other details.
+                   3D animation with realistic rendering transforms 3D models into photorealistic 2D video sequences by simulating lighting, shadows, textures, and depth. It merges artistic vision with technical precision, using rendering engines like Arnold or real-time tools for high-fidelity, polished visual outputs. Key steps include modeling, texturing, lighting, and rendering to simulate, often in seconds, complex physical interactions. 
+                </p>
+               
+            </div>
+           <div class="right">
+                <img src="images/3d6.gif" alt="">
+
+            </div>
+
+        </section>
+
+
+
+              
+     <section class="main">
+          <div class="right">
+                <img src="images/3d7.gif" alt="">
+
+            </div>
+
+            <div class="left">
+                <h1>Tools and techniques </h1>
+                <p>
+               Popular 3D modeling tools include Blender, Maya, and 3DS Max, each with features suited to different animation projects. like, Maya is widely used in the film and television industry. Developed by Autodesk, it excels in character animation, dynamic simulations, and visual effects.   3DS Max, another Autodesk product, is popular in the gaming industry and architectural visualization. It offers powerful polygon modeling tools, a flexible plugin architecture, and excellent rendering capabilities.   Blender, an open-source powerhouse, provides a comprehensive suite of tools for modeling, rigging, animation, simulation, rendering, and more.
+                </p>
+               
+            </div>
+          
+        </section>
+
+
+
+        
+        <footer class="footer">Created BY Aditya </footer>
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+        
+
+
+        <script>
+/* Navbar scroll */
+window.addEventListener('scroll',()=>{
+  document.querySelector('.navbar')
+    .classList.toggle('scrolled',window.scrollY>20);
+});
+
+/* Mobile menu */
+const menuBtn=document.getElementById('menu_btn');
+const navLinks=document.getElementById('nav_links');
+const menuIcon=menuBtn.querySelector('i');
+
+menuBtn.onclick=()=>{
+  navLinks.classList.toggle('open');
+  menuIcon.className=
+    navLinks.classList.contains('open')
+    ? 'ri-close-line'
+    : 'ri-menu-line';
+};
+
+/* ScrollReveal */
+const srOpt={ distance:'50px', duration:1000, origin:'bottom' };
+
+ScrollReveal().reveal('.left h1',{...srOpt,delay:300});
+ScrollReveal().reveal('.left p',{...srOpt,delay:600});
+ScrollReveal().reveal('.right img',{...srOpt,origin:'right'});
+ScrollReveal().reveal('.btn',{...srOpt,delay:900});
+</script>
+
+
+</body>
+
+
+ 
+
+
+</html>
